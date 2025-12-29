@@ -19,6 +19,11 @@ const IconNotebook = () => (
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
   </svg>
 );
+const IconCopy = () => (
+  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+  </svg>
+);
 
 export default function Home() {
   const [notebooks, setNotebooks] = useState<Notebook[]>([]);
@@ -28,6 +33,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -102,6 +108,13 @@ export default function Home() {
       setNotes(notes.filter(n => n.id !== id));
       if (selectedNoteId === id) setSelectedNoteId(null);
     } catch (e) { alert("删除失败"); }
+  };
+
+  const handleCopy = () => {
+    if (!selectedNote) return;
+    navigator.clipboard.writeText(selectedNote.content);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   // Debounced Save
@@ -248,28 +261,48 @@ export default function Home() {
           <div className="flex-col h-full">
             <div style={{ padding: '30px 40px 10px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)', fontSize: '12px', alignItems: 'center' }}>
-                <div className="flex-row" style={{ gap: '10px', alignItems: 'center' }}>
-                  <span>笔记本: </span>
-                  <select
-                    value={selectedNote.notebookId}
-                    onChange={(e) => handleUpdateNote('notebookId', e.target.value)}
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      color: 'var(--text-secondary)',
-                      border: '1px solid var(--border-color)',
-                      outline: 'none',
-                      cursor: 'pointer',
-                      fontSize: '12px',
-                      padding: '2px 8px',
-                      borderRadius: '4px'
-                    }}
-                  >
-                    {notebooks.map(nb => <option key={nb.id} value={nb.id} style={{ color: 'black' }}>{nb.name}</option>)}
-                  </select>
+                <div className="flex-row" style={{ gap: '15px', alignItems: 'center' }}>
+                  <div className="flex-center" style={{ gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px 8px', borderRadius: '6px' }}>
+                    <span>📂 移动到:</span>
+                    <select
+                      value={selectedNote.notebookId}
+                      onChange={(e) => handleUpdateNote('notebookId', e.target.value)}
+                      style={{
+                        background: 'transparent',
+                        color: 'var(--text-primary)',
+                        border: 'none',
+                        outline: 'none',
+                        cursor: 'pointer',
+                        fontSize: '12px',
+                        fontWeight: 500
+                      }}
+                    >
+                      {notebooks.map(nb => <option key={nb.id} value={nb.id} style={{ color: 'black' }}>{nb.name}</option>)}
+                    </select>
+                  </div>
                 </div>
-                <div className="flex-row" style={{ gap: '12px' }}>
+                <div className="flex-row" style={{ gap: '12px', alignItems: 'center' }}>
                   <span>{new Date(selectedNote.updatedAt).toLocaleString()}</span>
                   <span>{saving ? '☁️ 保存中...' : '✓ 已保存'}</span>
+                  <button
+                    onClick={handleCopy}
+                    title="复制内容"
+                    style={{
+                      background: copied ? 'var(--accent-color)' : 'rgba(255,255,255,0.1)',
+                      color: copied ? '#000' : 'var(--text-primary)',
+                      border: 'none',
+                      padding: '6px',
+                      borderRadius: '6px',
+                      display: 'flex',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {copied ? (
+                      <span style={{ fontSize: '12px', fontWeight: 'bold', padding: '0 4px' }}>已复制</span>
+                    ) : (
+                      <IconCopy />
+                    )}
+                  </button>
                 </div>
               </div>
               <input
