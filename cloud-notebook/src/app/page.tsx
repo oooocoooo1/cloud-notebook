@@ -112,7 +112,8 @@ export default function Home() {
 
   const handleCopy = () => {
     if (!selectedNote) return;
-    navigator.clipboard.writeText(selectedNote.content);
+    const textToCopy = `${selectedNote.title}\n\n${selectedNote.content}`;
+    navigator.clipboard.writeText(textToCopy);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
