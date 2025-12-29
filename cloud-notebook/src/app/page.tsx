@@ -263,10 +263,20 @@ export default function Home() {
           <button
             onClick={handleCreateNotebook}
             className="btn"
-            style={{ padding: '8px', opacity: 0.9, justifyContent: 'center', background: 'var(--bg-input)' }}
-            title="新建笔记本"
+            style={{
+              padding: '8px',
+              opacity: 0.9,
+              justifyContent: 'center',
+              background: 'var(--bg-input)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              color: 'var(--text-primary)'
+            }}
+            title={t('new_notebook')}
           >
-            <IconPlus /> {t('new_notebook')}
+            <IconPlus />
+            <span>{t('new_notebook')}</span>
           </button>
         </div>
 
