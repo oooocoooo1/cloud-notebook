@@ -6,7 +6,7 @@
 
 一个现代化、极简设计的个人云笔记应用。构建于 Next.js 技术栈，支持云端数据库存储，并专为 Windows 效率工具 **Quicker** 提供了极速上传接口。
 
-![Cloud Notebook UI](public/window.svg)
+![Cloud Notebook UI](public/window.png)
 
 ## ✨ 主要功能
 
@@ -37,7 +37,8 @@
 ### 1. 准备数据库 (Neon)
 1.  注册并登录 [Neon.tech](https://neon.tech/)。
 2.  创建一个新项目 (Project)。
-3.  复制 Dashboard 上的 **Connection String** (连接字符串)。
+3.  复制 Dashboard 上的 **Connection String** (连接字符串)。 
+    *   它看起来像这样：`postgresql://neondb_owner:AbCd123@ep-cool-frog-123456.us-east-2.aws.neon.tech/neondb?sslmode=require`。
     *   *注意：请确保勾选 `Pooled connection` (如有) 或使用默认链接。*
 
 ### 2. 获取代码
