@@ -6,7 +6,7 @@
 
 一个现代化、极简设计的个人云笔记应用。构建于 Next.js 技术栈，支持云端数据库存储，并专为 Windows 效率工具 **Quicker** 提供了极速上传接口。
 
-![Cloud Notebook UI](public/window.svg)
+
 
 ## ✨ 主要功能
 
