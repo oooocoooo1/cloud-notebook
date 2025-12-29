@@ -1,0 +1,26 @@
+[
+  {
+    "id": "welcome-note",
+    "notebookId": "default",
+    "title": "欢迎使用云笔记",
+    "content": "这是一个简易的云笔记应用。你可以创建、编辑和保存笔记。",
+    "createdAt": "2025-12-28T14:12:58.632Z",
+    "updatedAt": "2025-12-28T14:12:58.632Z"
+  },
+  {
+    "id": "4a5869ad-2094-43b7-a086-c2e16585c4a6",
+    "notebookId": "default",
+    "title": "新笔记",
+    "content": "这是我制作的云笔记本的第一个笔试",
+    "createdAt": "2025-12-28T14:13:04.757Z",
+    "updatedAt": "2025-12-28T14:13:25.387Z"
+  },
+  {
+    "id": "582dbc77-9464-43e8-9250-1d12f83870f4",
+    "notebookId": "default",
+    "title": "ake a look at the following re",
+    "content": "ake a look at the following resources:",
+    "createdAt": "2025-12-28T14:18:28.235Z",
+    "updatedAt": "2025-12-28T14:18:28.235Z"
+  }
+]
