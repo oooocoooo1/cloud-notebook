@@ -29,22 +29,28 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
+  const [error, setError] = useState<string | null>(null);
+
   // Load Initial Data
   useEffect(() => {
     async function init() {
       try {
         const nbRes = await fetch('/api/notebooks');
+        if (!nbRes.ok) throw new Error(`Notebooks API Error: ${nbRes.statusText}`);
         const nbs = await nbRes.json();
         setNotebooks(nbs);
         if (nbs.length > 0) setSelectedNotebookId(nbs[0].id);
 
         const nRes = await fetch('/api/notes');
+        if (!nRes.ok) throw new Error(`Notes API Error: ${nRes.statusText}`);
         const ns = await nRes.json();
         setNotes(ns);
 
-        setLoading(false);
       } catch (e) {
         console.error("Original Load Failed", e);
+        setError(String(e));
+      } finally {
+        setLoading(false);
       }
     }
     init();
@@ -125,6 +131,13 @@ export default function Home() {
   };
 
   if (loading) return <div className="flex-center h-full w-full">Loading...</div>;
+  if (error) return (
+    <div className="flex-center h-full w-full flex-col" style={{ gap: '20px' }}>
+      <div style={{ color: 'red', fontSize: '18px' }}>⚠️ 加载失败</div>
+      <pre style={{ background: '#333', padding: '10px', borderRadius: '4px' }}>{error}</pre>
+      <p style={{ color: 'var(--text-muted)' }}>请检查 Vercel 环境变量 DATABASE_URL 是否配置正确</p>
+    </div>
+  );
 
   return (
     <div className="flex-row h-full w-full">
