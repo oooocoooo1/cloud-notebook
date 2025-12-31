@@ -48,7 +48,6 @@ Fork 本仓库或下载代码到本地。
 1.  在 [Vercel](https://vercel.com/) 导入你的 GitHub 仓库。
 2.  **关键设置**:
     *   **Framework Preset (框架预设)**: `Next.js`。
-    *   **Root Directory (根目录)**: `cloud-notebook` (⚠️ 必须修改此项，否则构建失败)。
     *   **Environment Variables (环境变量)**:
         *   键: `DATABASE_URL`
         *   值: `postgresql://...` (填入第1步获取的 Neon 连接字符串)。
@@ -137,7 +136,6 @@ Fork this repository or download the code locally.
 1.  Import your GitHub repository in [Vercel](https://vercel.com/).
 2.  **Key Settings**:
     *   **Framework Preset**: `Next.js`.
-    *   **Root Directory**: `cloud-notebook` (⚠️ Must check this, otherwise build will fail).
     *   **Environment Variables**:
         *   Key: `DATABASE_URL`
         *   Value: `postgresql://...` (Paste the Neon connection string from Step 1).
